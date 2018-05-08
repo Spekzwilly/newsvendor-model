@@ -1,0 +1,30 @@
+cost = int(input())
+price = int(input())
+maxDemand = int(input())
+
+# declare a list with 9 elements
+probability = [0] * (maxDemand + 1)
+
+# input 9 probabilities into the list
+for i in range(maxDemand+1):
+  probability[i] = float(input())
+
+optProfit = 0.0
+
+optQuantity= 0
+
+for quantity in range(maxDemand + 1):
+  expSales = 0.0
+  
+  for demand in range(maxDemand + 1):
+    if demand < quantity:
+      expSales += probability[demand] * demand
+    else:
+      expSales += probability[demand] * quantity
+      
+  profit = expSales * price - quantity * cost
+  if profit > optProfit:
+    optProfit = profit
+    optQuantity = quantity
+
+print(int(optQuantity), int(optProfit))
